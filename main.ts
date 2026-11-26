@@ -11,7 +11,7 @@
 //   mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
 // Inside the grader, MAKEFUN_OUTPUT_DIR is unset and the output goes to /output.
 
-import { cpSync, existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildDossier } from './vendor/makefun-game.ts';
@@ -34,8 +34,7 @@ const DOSSIER_CAPS = {
 };
 
 function handIn() {
-  // Start clean so a stale file from an earlier run can never ride along.
-  rmSync(outputDir, { recursive: true, force: true });
+  // The grader hands us an empty output directory, so there is nothing to clean.
   mkdirSync(outputDir, { recursive: true });
 
   // The game itself, and the screenshots the judge sees first.
